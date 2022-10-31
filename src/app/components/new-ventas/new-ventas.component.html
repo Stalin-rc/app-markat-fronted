@@ -64,8 +64,8 @@
                             <input type="text" placeholder="Escribe el nombre del producto" matInput
                                 [formControl]="myControl" [matAutocomplete]="auto">
                             <mat-autocomplete #auto="matAutocomplete">
-                                <mat-option *ngFor="let option of filteredOptions | async" [value]="option.name">
-                                    <div (click)="conseguirProducto(option)">{{option.name}},
+                                <mat-option *ngFor="let option of filteredOptions | async" [value]="option.productName">
+                                    <div (click)="conseguirProducto(option)">{{option.productName}},
                                     </div>
                                 </mat-option>
                             </mat-autocomplete>
@@ -106,7 +106,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let det of detalles">
-                        <td>{{det.product.name}}</td>
+                        <td>{{det.product.productName}}</td>
                         <td>1.2</td>
                         <td>{{det.noUnits}}</td>
                         <td>{{det.subtotalPrice |currency:'USD'}}</td>

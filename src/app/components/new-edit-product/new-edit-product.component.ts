@@ -72,12 +72,12 @@ export class NewEditProductComponent implements OnInit {
   addProducto() {
     const producto: Producto = {
       id: this.id_producto,
-      name: this.myForm.get('nombre')?.value,
+      productName: this.myForm.get('nombre')?.value,
       brand: this.myForm.get('marca')?.value,
-      description: this.myForm.get('descripcion')?.value,
+      productDescription: this.myForm.get('descripcion')?.value,
       img: this.myForm.get('url')?.value,
       precio: this.myForm.get('precio')?.value,
-      tipo: ''
+      type_name: ''
     }
 
     /*

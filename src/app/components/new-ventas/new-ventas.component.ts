@@ -52,7 +52,7 @@ export class NewVentasComponent implements OnInit {
   }
   private _filter(value: string) {
     const filterValue = value.toLowerCase();
-    return this.options.filter(option => option.name.toLowerCase().includes(filterValue));
+    return this.options.filter(option => option.productName.toLowerCase().includes(filterValue));
   }
   reactiveForm() {
     this.myForm = this.formBuilder.group({
