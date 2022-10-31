@@ -18,7 +18,7 @@ export class VentasService {
   }
 
   addVenta(venta:Ventas){
-    return this.http.post<Ventas>("http://localhost:8080/api/sale",venta);
+    return this.http.post<Ventas>("http://localhost:8080/api/sales",venta);
   }
 
 

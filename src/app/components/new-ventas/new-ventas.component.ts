@@ -85,38 +85,77 @@ export class NewVentasComponent implements OnInit {
     }
     return _sum;
   }
+  quitar(idx: number) {
+    this.detalles.splice(idx, 1);
+  }
   addVenta() {
-    let cliente: Cliente = {
-      id: 99999,
-      firstName: this.myForm.get('nombre')?.value,
-      lastName: this.myForm.get('apellido')?.value,
-      dni: this.myForm.get('dni')?.value
-    }
 
-    this.clienteService.addCliente(cliente).subscribe({
-      next: (data: Cliente) => {
-        let venta: Ventas = {
-          id: 99999,
-          totalPrice: this.total(),
-          client: data,
-          dateSale: new Date(),
-          sellType: '123',
-          noVoucher: '123'
-        }
-        this.ventaService.addVenta(venta).subscribe({
-          next: (data: Ventas) => {
-            for (let i = 0; i < this.detalles.length; i++) {
-              this.detalles[i].sale = data;
-            }
-            this.detalleService.addDetalle(this.detalles).subscribe(
-              (data: DetalleVenta[]) => {
-                this.router.navigate(['dashboard/1/ventas']);
-              }
-            )
+
+    this.clienteService.getClientes().subscribe(
+      (data: Cliente[]) => {
+        let _cliente: any = data.find(x => x.dni == this.myForm.get('dni')?.value);
+        if (_cliente) {
+          let venta: Ventas = {
+            id: 99999,
+            totalPrice: this.total(),
+            client: _cliente,
+            dateSale: new Date(),
+            sellType: '123',
+            noVoucher: '123'
           }
-        })
+          this.ventaService.addVenta(venta).subscribe({
+            next: (data: Ventas) => {
+              console.log('añadiendo venta: ', data);
+              for (let i = 0; i < this.detalles.length; i++) {
+                this.detalles[i].sale = data;
+              }
+              this.detalleService.addDetalle(this.detalles).subscribe({
+                next: (data: DetalleVenta[]) => {
+                  this.router.navigate(['dashboard/1/ventas']);
+                },
+                error: e => console.log('error detalle: ', e)
+              })
+            },
+            error: e => console.log('error venta: ' + e)
+          })
+        } else {
+          let cliente: Cliente = {
+            id: 99999,
+            firstName: this.myForm.get('nombre')?.value,
+            lastName: this.myForm.get('apellido')?.value,
+            dni: this.myForm.get('dni')?.value
+          }
+          this.clienteService.addCliente(cliente).subscribe({
+            next: (data: Cliente) => {
+              let venta: Ventas = {
+                id: 99999,
+                totalPrice: this.total(),
+                client: data,
+                dateSale: new Date(),
+                sellType: '123',
+                noVoucher: '123'
+              }
+              this.ventaService.addVenta(venta).subscribe({
+                next: (data: Ventas) => {
+                  console.log('añadiendo venta: ', data);
+                  for (let i = 0; i < this.detalles.length; i++) {
+                    this.detalles[i].sale = data;
+                  }
+                  this.detalleService.addDetalle(this.detalles).subscribe({
+                    next: (data: DetalleVenta[]) => {
+                      this.router.navigate(['dashboard/1/ventas']);
+                    },
+                    error: e => console.log('error detalle: ', e)
+                  })
+                },
+                error: e => console.log('error venta: ' + e)
+              })
+            }
+          })
+        }
       }
-    })
+    )
+
 
 
   }

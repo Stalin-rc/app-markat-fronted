@@ -105,13 +105,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let det of detalles">
+                    <tr *ngFor="let det of detalles; let i=index">
                         <td>{{det.product.productName}}</td>
                         <td>1.2</td>
                         <td>{{det.noUnits}}</td>
                         <td>{{det.subtotalPrice |currency:'USD'}}</td>
                         <td>
-                            <button mat-raised-button color="warn">
+                            <button mat-raised-button color="warn" (click)="quitar(i)">
                                 <mat-icon>delete</mat-icon>
                             </button>
                         </td>
