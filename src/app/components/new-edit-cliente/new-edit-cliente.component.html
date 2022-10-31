@@ -1,0 +1,23 @@
+<div class="delay">
+    <div class="popup">
+        <h1 class="text-center">AGREGAR CLIENTE</h1>
+        <form [formGroup]="myForm">
+            <mat-form-field appearance="standard" class="w-100">
+                <mat-label>DNI</mat-label>
+                <input matInput placeholder="45566385" #input formControlName="dni">
+            </mat-form-field><br>
+            <mat-form-field appearance="standard" class="w-100">
+                <mat-label>NOMBRE</mat-label>
+                <input matInput placeholder="nombre cliente" #input formControlName="nombre">
+            </mat-form-field><br>
+            <mat-form-field appearance="standard" class="w-100">
+                <mat-label>APELLIDO</mat-label>
+                <input matInput placeholder="apellido cliente" #input formControlName="lastName">
+            </mat-form-field>
+            <div class="d-flex justify-content-between">
+                <button mat-raised-button routerLink="/dashboard/1/clientes">Cancelar</button>
+                <button mat-raised-button routerLink="/dashboard/1/clientes" (click)="addCliente()">Agregar</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,101 @@
+<div class="container-fluid">
+  <div class="row g-0">
+    <div
+      class="col d-flex justify-content-center align-items-center px-5"
+      id="rec-1"
+    >
+      <img
+        class="img-fluid"
+        id="img_logo"
+        src="../../../assets/img/markat.jpg"
+        alt="logo"
+      />
+    </div>
+
+    <div class="col px-5" id="rec-2">
+      <div class="px-5">
+        <h2 class="text-left py-5">Registro</h2>
+
+        <form>
+          <mat-form-field appearance="standard" class="w-50 mb-0">
+            <mat-label class="font-lighter">Nombre y Apellidos</mat-label>
+            <input matInput placeholder="Ingrese su nombre y apellidos" />
+          </mat-form-field>
+          <br />
+          <mat-form-field appearance="standard" class="w-50 mb-0">
+            <mat-label class="font-lighter">DNI</mat-label>
+            <input matInput placeholder="Ingrese su número de DNI" />
+          </mat-form-field>
+          <br />
+          <mat-form-field appearance="standard" class="w-50 mb-0">
+            <mat-label class="font-lighter">Correo</mat-label>
+            <input matInput placeholder="Ingrese su correo" />
+          </mat-form-field>
+          <br />
+          <mat-form-field appearance="standard" class="w-50 mb-0">
+            <mat-label class="font-lighter">Contraseña</mat-label>
+            <input matInput placeholder="Ingrese su contraseña" />
+          </mat-form-field>
+          <br />
+          <mat-form-field appearance="standard" class="w-50 mb-0">
+            <mat-label class="font-lighter">Confirme su contraseña</mat-label>
+            <input matInput placeholder="Ingrese de nuevo su contraseña" />
+          </mat-form-field>
+          <br />
+
+          <mat-form-field appearance="standard" class="w-50 mb-0">
+            <mat-label class="font-lighter">Nombre de negocio</mat-label>
+            <input matInput placeholder="Ingrese el nombre de su negocio" />
+          </mat-form-field>
+          <br />
+
+          <mat-form-field appearance="standard" class="w-50 mb-4">
+            <mat-label class="font-lighter">RUC</mat-label>
+            <input matInput placeholder="Ingrese el número de RUC" />
+          </mat-form-field>
+
+          <div class="text-end w-50">
+            <button
+              mat-raised-button
+              id="btn-ingresar"
+              routerLink="/login"
+              class="font-lighter w-50"
+            >
+              Listo
+            </button>
+          </div>
+        </form>
+
+        <br /><br />
+
+        <div class="row lign-items-end">
+          <div class="col">
+            <p class="d-inline-block mb-0 text-primary font-300">
+              ¿No tienes una cuenta?
+            </p>
+            <a
+              class="font-weight-bold text-decoration-none font-700"
+              routerLink="/login"
+            >
+            Indentificarse</a
+            >
+          </div>
+          <div class="py-2 mb-0">
+            <p class="d-inline-block mb-0 font-300 text-primary">
+              ¿Olvidaste tu contraseña?
+            </p>
+            <a class="font-weight-bold text-decoration-none font-700" routerLink="/recover-pw">
+              Recuperar mi contraseña</a
+            >
+          </div>
+
+          <div class="py-2 mb-0">
+            <p class="d-inline-block mb-0 font-300 text-secondary">
+              © copyright 2022 | Todos los derechos reservados por Markat, Inc.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

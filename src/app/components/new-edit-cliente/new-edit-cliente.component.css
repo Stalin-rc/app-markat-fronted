@@ -1,0 +1,18 @@
+.delay{
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.3);
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup{
+    width: 30%;
+    background-color: whitesmoke;
+    padding: 20px 20px;
+    border-radius: 10px;
+}
