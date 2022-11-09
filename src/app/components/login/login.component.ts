@@ -1,7 +1,7 @@
+import { Stores } from './../../models/stores';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { BodeguerosService } from '../../services/stores/bodegueros.service';
-import { Bodegueros } from './../../models/bodegueros';
+import { StoresService } from '../../services/stores/stores.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,18 +13,19 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   hide = true;
   myform!: FormGroup;
-  Bodegueros!: Bodegueros[];
-  correo!: string;
-  contraseña!: string;
+  Stores!: Stores[];
+  email!: string;
+  password!: string;
   esValido!: boolean;
-
+  id!: number;
+  
   constructor(private formBuilder: FormBuilder,
-    private BodeguerosService: BodeguerosService,
+    private StoresService: StoresService,
     private router: Router) { }
 
   ngOnInit(): void {
   this.loadMyForm();
-    this.getBodegueros();
+    this.getStores();
     this.esValido = true;}
 
 
@@ -35,28 +36,31 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required, Validators.maxLength(50)]]
     })
   }
-  getBodegueros() {
-    this.BodeguerosService.getBodegueros().subscribe(
-      (data: Bodegueros[]) => {
-        this.Bodegueros = data;
+
+  getStores() {
+    this.StoresService.getStores().subscribe(
+      (data: Stores[]) => {
+        this.Stores = data;
       }
     )
   }
 
   verificarUsuario(): void {
-    console.log(this.Bodegueros);
-    this.correo = this.myform.get('email')?.value;
-    this.contraseña = this.myform.get('password')?.value;
-
-    for (let i = 0; i < this.Bodegueros.length; i++) {
-      if (this.Bodegueros[i].correo == this.correo && this.Bodegueros[i].contraseña == this.contraseña) {
-        this.router.navigate([`dashboard/${this.Bodegueros[i].id}`]);
+    this.email = this.myform.get('email')?.value;
+    this.password = this.myform.get('password')?.value;
+    this.StoresService.getStores().subscribe(
+      (data: Stores[]) => {
+        let auxstore= data.find(x => x.email == this.email && x.password == this.password);
+        if (auxstore) {
+          this.router.navigate(["dashboard/" + auxstore.id]);
+        }
       }
-    }
+    );
     this.esValido = false;
+  }
   }
 
 
-}
+
 
 

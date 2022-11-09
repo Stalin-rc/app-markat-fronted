@@ -1,5 +1,5 @@
-import { BodeguerosService } from '../../services/stores/bodegueros.service';
-import { Bodegueros } from './../../models/bodegueros';
+import { StoresService } from '../../services/stores/stores.service';
+import { Stores } from '../../models/stores';
 import { Cliente } from './../../models/cliente';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -17,11 +17,11 @@ export class NewEditClienteComponent implements OnInit {
   myForm!: FormGroup;
   url!: string;
   id!: number;
-  Bodegueros!: Bodegueros;
+  Stores!: Stores;
 
 
   constructor(private activated: ActivatedRoute, private formBuilder: FormBuilder, private clienteService: ClienteService,
-    private router: Router, private BodeguerosService: BodeguerosService,
+    private router: Router, private StoresService: StoresService,
     private activetedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -38,13 +38,23 @@ export class NewEditClienteComponent implements OnInit {
     //   }
     // )
 
+    
+    
+  
   }
 
   reactiveForm() {
     this.myForm = this.formBuilder.group({
-      nombre: ['', [Validators.required]],
+
+      first_name: ['', [Validators.required]],
+      last_name: ['', Validators.required],
       dni: ['', [Validators.required]],
-      lastName: ['', Validators.required]
+      client_address: ['', [Validators.required]],
+      no_phone:['', [Validators.required]],
+      credit: ['', [Validators.required]],
+      photo:['', [Validators.required]],
+      pay_date: ['', [Validators.required]],
+      morosidad: ['', [Validators.required]]
     })
   }
 
@@ -52,9 +62,22 @@ export class NewEditClienteComponent implements OnInit {
   addCliente() {
     let cliente: Cliente = {
       id: 999999,
-      firstName: this.myForm.get('nombre')?.value,
-      lastName: this.myForm.get('lastName')?.value,
-      dni: this.myForm.get('dni')?.value
+      firstName: this.myForm.get('first_name')?.value,
+      lastName: this.myForm.get('last_name')?.value,
+      dni: this.myForm.get('dni')?.value,
+      credit: this.myForm.get('credit')?.value,
+      morosidad: this.myForm.get('morosidad')?.value,
+      payDate: this.myForm.get('pay_date')?.value,
+      photo: this.myForm.get('photo')?.value
+      /*
+      clientAddress: this.myForm.get('client_address')?.value,
+      noPhone: this.myForm.get('no_phone')?.value,
+      credit: this.myForm.get('credit')?.value
+      photo: this.myForm.get('photo')?.value,
+      payDate: this.myForm.get('pay_date')?.value,
+      morosidad: this.myForm.get('morosidad')?.value
+*/
+
     }
 
     this.clienteService.addCliente(cliente).subscribe({

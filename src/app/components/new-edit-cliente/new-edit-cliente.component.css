@@ -11,8 +11,20 @@
 }
 
 .popup{
-    width: 30%;
+    width: 50%;
     background-color: whitesmoke;
     padding: 20px 20px;
     border-radius: 10px;
+}
+
+.example-container .mat-radio-button {
+    margin: 0 12px;
+}
+
+.morosidad{
+margin-left: 20px;
+}
+
+.moro-op{
+    margin-left: 10px;  
 }

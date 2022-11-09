@@ -1,5 +1,5 @@
-import { Bodegueros } from './../../models/bodegueros';
-import { BodeguerosService } from '../../services/stores/bodegueros.service';
+import { StoresService } from './../../services/stores/stores.service';
+import { Stores } from '../../models/stores';
 import { Producto } from './../../models/producto';
 import { ProductosService } from './../../services/products/productos.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -17,10 +17,10 @@ export class NewEditProductComponent implements OnInit {
   url!: string;
   /*Bodeguero*/
   id!: number;
-  Bodegueros!: Bodegueros;
+  Bodegueros!: Stores;
 
   constructor(private activated: ActivatedRoute, private formBuilder: FormBuilder, private productoService: ProductosService,
-    private router: Router, private BodeguerosService: BodeguerosService,
+    private router: Router, private StoresService: StoresService,
     private activetedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -31,8 +31,8 @@ export class NewEditProductComponent implements OnInit {
     /*Bodeguero*/
 
     this.id = this.activetedRoute.snapshot.params['id'];
-    this.BodeguerosService.getBodeguero(this.id).subscribe(
-      (data: Bodegueros) => {
+    this.StoresService.getStore(this.id).subscribe(
+      (data: Stores) => {
         this.Bodegueros = data;
       }
     )

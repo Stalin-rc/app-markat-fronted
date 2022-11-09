@@ -1,5 +1,5 @@
-import { BodeguerosService } from '../../services/stores/bodegueros.service';
-import { Bodegueros } from './../../models/bodegueros';
+import { StoresService } from '../../services/stores/stores.service';
+import { Stores } from '../../models/stores';
 import { VentasService } from './../../services/sales/ventas.service';
 import { Ventas } from './../../models/ventas';
 import { Component, OnInit } from '@angular/core';
@@ -16,13 +16,13 @@ export class VentasComponent implements OnInit {
 
   displayedColumns: string[] = ["cliente", "productos", "precioTotal","credito","fechaVenta","comprobante"];
   dataSource = new MatTableDataSource<Ventas>();
-  id!: number;
+  idStore!: number;
   constructor(private ventaService: VentasService,
               private activetedRoute: ActivatedRoute,) { }
 
   ngOnInit(): void {
-    this.getVentas();
-    this.id = this.activetedRoute.snapshot.params['id'];
+    this.idStore = this.activetedRoute.snapshot.params['id'];
+    this.getVentas(this.idStore);
   }
 
   applyFilter(event: Event) {
@@ -30,8 +30,8 @@ export class VentasComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  getVentas(): void{
-    this.ventaService.getVentas().subscribe(
+  getVentas(idStore:number): void{
+    this.ventaService.getVentas(this.idStore).subscribe(
       (data:Ventas[]) => {
         this.dataSource = new MatTableDataSource(data);
       }

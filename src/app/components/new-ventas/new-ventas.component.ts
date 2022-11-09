@@ -91,7 +91,7 @@ export class NewVentasComponent implements OnInit {
   addVenta() {
 
 
-    this.clienteService.getClientes().subscribe(
+    this.clienteService.getClientes(this.id).subscribe(
       (data: Cliente[]) => {
         let _cliente: any = data.find(x => x.dni == this.myForm.get('dni')?.value);
         if (_cliente) {
@@ -121,9 +121,14 @@ export class NewVentasComponent implements OnInit {
         } else {
           let cliente: Cliente = {
             id: 99999,
-            firstName: this.myForm.get('nombre')?.value,
-            lastName: this.myForm.get('apellido')?.value,
-            dni: this.myForm.get('dni')?.value
+            firstName: this.myForm.get('first_name')?.value,
+            lastName: this.myForm.get('last_name')?.value,
+            dni: this.myForm.get('dni')?.value,
+            credit: this.myForm.get('credit')?.value,
+            morosidad: this.myForm.get('morosidad')?.value,
+            payDate: this.myForm.get('pay_date')?.value,
+            photo: this.myForm.get('photo')?.value
+            
           }
           this.clienteService.addCliente(cliente).subscribe({
             next: (data: Cliente) => {

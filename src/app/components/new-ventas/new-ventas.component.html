@@ -12,17 +12,17 @@
                         <div class="col-md-6">
                             <mat-form-field appearance="standard" class="w-100">
                                 <mat-label>Nombre del cliente</mat-label>
-                                <input matInput formControlName="nombre" placeholder="Nombre del cliente..">
+                                <input matInput formControlName="nombre" placeholder="Ingrese el nombre del cliente..">
                             </mat-form-field>
                             <br>
                             <mat-form-field appearance="standard" class="w-100">
                                 <mat-label>Apellido del cliente</mat-label>
-                                <input matInput placeholder="Apellido del cliente.." formControlName="apellido">
+                                <input matInput placeholder="Ingrese el apellido del cliente.." formControlName="apellido">
                             </mat-form-field>
                             <br>
                             <mat-form-field appearance="standard" class="w-100">
                                 <mat-label>DNI</mat-label>
-                                <input matInput placeholder="DNI del cliente.." formControlName="dni">
+                                <input matInput placeholder="Ingrese el DNI del cliente.." formControlName="dni">
                             </mat-form-field>
                             <br>
                             <br>
@@ -107,9 +107,9 @@
                 <tbody>
                     <tr *ngFor="let det of detalles; let i=index">
                         <td>{{det.product.productName}}</td>
-                        <td>1.2</td>
+                        <td>{{det.priceUnit}}</td>
                         <td>{{det.noUnits}}</td>
-                        <td>{{det.subtotalPrice |currency:'USD'}}</td>
+                        <td>{{det.subtotalPrice |currency:'S/. '}}</td>
                         <td>
                             <button mat-raised-button color="warn" (click)="quitar(i)">
                                 <mat-icon>delete</mat-icon>
@@ -122,10 +122,10 @@
         <div class="my-4 d-flex justify-content-between">
             <div>
                 <span class="fs-3">total: </span>
-                <span class="fs-1">{{total()|currency:'USD'}}</span>
+                <span class="fs-1">{{total()|currency:'S/. '}}</span>
             </div>
             <div>
-                <button mat-raised-button class="me-4" routerLink="/dashboard/ventas/{{id}}">Cancelar</button>
+                <button mat-raised-button class="me-4" routerLink="/dashboard/{{id}}/ventas">Cancelar</button>
                 <button mat-raised-button id="button" (click)="addVenta()">Guardar</button>
             </div>
         </div>

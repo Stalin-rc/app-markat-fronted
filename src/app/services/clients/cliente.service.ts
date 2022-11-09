@@ -1,6 +1,7 @@
 import { Cliente } from '../../models/cliente';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { identifierName } from '@angular/compiler';
 @Injectable({
   providedIn: 'root'
 })
@@ -8,8 +9,8 @@ export class ClienteService {
 
   constructor(private http: HttpClient) { }
 
-  getClientes() {
-    return this.http.get<Cliente[]>('http://localhost:8080/api/clients');
+  getClientes(id:number) {
+    return this.http.get<Cliente[]>('http://localhost:8080/api/user/' + id +'/clients');
   }
   addCliente(cliente: Cliente) {
     return this.http.post<Cliente>('http://localhost:8080/api/clients', cliente);

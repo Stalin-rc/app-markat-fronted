@@ -9,8 +9,8 @@ export class VentasService {
 
   constructor(private http: HttpClient) { }
 
-  getVentas(){
-    return this.http.get<Ventas[]>("http://localhost:8080/api/sales");
+  getVentas(id: number){
+    return this.http.get<Ventas[]>('http://localhost:8080/api/user/' + id +'/sales');
   }
 
   getVenta(id: number){

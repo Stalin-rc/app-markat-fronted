@@ -1,5 +1,5 @@
-import { BodeguerosService } from '../../services/stores/bodegueros.service';
-import { Bodegueros } from './../../models/bodegueros';
+import { StoresService } from '../../services/stores/stores.service';
+import { Stores } from '../../models/stores';
 import { ActivatedRoute } from '@angular/router';
 import { Cliente } from './../../models/cliente';
 import { Component, OnInit } from '@angular/core';
@@ -13,7 +13,7 @@ import { ClienteService } from 'src/app/services/clients/cliente.service';
 })
 export class ClientesComponent implements OnInit {
 
-  displayedColumns: string[] = ['id','dni','nombre','apellido'];
+  displayedColumns: string[] = ['photo','firstName','lastName','dni','credit','morosidad','pay_date'];
   dataSource = new MatTableDataSource<Cliente>();
   id!:number;
 
@@ -21,19 +21,25 @@ export class ClientesComponent implements OnInit {
     private activetedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.getClientes();
+    
     this.id = this.activetedRoute.snapshot.params['id'];
+    this.getClientes(this.id);
+
+  
+     this.id = this.activetedRoute.snapshot.params['id'];
+
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  getClientes() {
-    this.clienteService.getClientes().subscribe(
+  getClientes(id:number) {
+    this.clienteService.getClientes(id).subscribe(
       (data: Cliente[]) => {
         this.dataSource = new MatTableDataSource(data);
       }
     )
   }
+
 }

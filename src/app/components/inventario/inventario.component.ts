@@ -1,5 +1,5 @@
-import { Bodegueros } from './../../models/bodegueros';
-import { BodeguerosService } from '../../services/stores/bodegueros.service';
+import { Stores } from '../../models/stores';
+import { StoresService } from '../../services/stores/stores.service';
 import { Producto } from './../../models/producto';
 import { ProductosService } from './../../services/products/productos.service';
 import { Component, OnInit } from '@angular/core';
@@ -21,17 +21,17 @@ export class InventarioComponent implements OnInit {
   dataSource = new MatTableDataSource<Producto>();
 
   id!: number;
-  Bodegueros!: Bodegueros;
+  Stores!: Stores;
 
   constructor(private productService: ProductosService, private ActivatedRoute: ActivatedRoute,
-    private BodeguerosService: BodeguerosService) { }
+    private StoresService: StoresService) { }
 
   ngOnInit(): void {
     this.getProductos();
     this.id = this.ActivatedRoute.snapshot.params['id'];
-    this.BodeguerosService.getBodeguero(this.id).subscribe(
-      (data: Bodegueros) => {
-        this.Bodegueros = data;
+    this.StoresService.getStore(this.id).subscribe(
+      (data: Stores) => {
+        this.Stores= data;
       }
     )
 

@@ -18,9 +18,23 @@
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-        <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef class="text-center"> ID </th>
-            <td mat-cell *matCellDef="let element" class="text-center"> {{element.id}} </td>
+        
+        <ng-container matColumnDef="photo" class="text-center">
+            <th mat-header-cell *matHeaderCellDef class="text-center"> Perfil </th>
+            <td mat-cell *matCellDef="let element" class="text-center"> 
+                <img src="{{element.photo}}" alt="img" class="img-table">
+                 </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="firstName" class="text-center">
+            <th mat-header-cell *matHeaderCellDef class="text-center"> Nombre</th>
+            <td mat-cell *matCellDef="let element" class="text-center"> {{element.firstName}} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="lastName">
+            <th mat-header-cell *matHeaderCellDef class="text-center"> Apellido</th>
+            <td mat-cell *matCellDef="let element" class="text-center"> {{element.lastName}} </td>
         </ng-container>
 
         <!-- Name Column -->
@@ -29,15 +43,23 @@
             <td mat-cell *matCellDef="let element" class="text-center"> {{element.dni}} </td>
         </ng-container>
 
-        <!-- Weight Column -->
-        <ng-container matColumnDef="nombre">
-            <th mat-header-cell *matHeaderCellDef class="text-center"> NOMBRE</th>
-            <td mat-cell *matCellDef="let element" class="text-center"> {{element.firstName}} </td>
-        </ng-container>
-        <ng-container matColumnDef="apellido">
-            <th mat-header-cell *matHeaderCellDef class="text-center"> APELLIDO</th>
-            <td mat-cell *matCellDef="let element" class="text-center"> {{element.lastName}} </td>
-        </ng-container>
+ <!-- Name Column -->
+ <ng-container matColumnDef="credit">
+    <th mat-header-cell *matHeaderCellDef class="text-center">Créditos </th>
+    <td mat-cell *matCellDef="let element" class="text-center"> {{element.credit}} </td>
+</ng-container>
+
+ <!-- Name Column -->
+ <ng-container matColumnDef="morosidad">
+    <th mat-header-cell *matHeaderCellDef class="text-center">Morosidad </th>
+    <td mat-cell *matCellDef="let element" class="text-center"> {{element.morosidad}} </td>
+</ng-container>
+
+ <!-- Name Column -->
+ <ng-container matColumnDef="pay_date">
+    <th mat-header-cell *matHeaderCellDef class="text-center">Fecha de pago </th>
+    <td mat-cell *matCellDef="let element" class="text-center"> {{element.payDate|date:"shortDate"}} </td>
+</ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

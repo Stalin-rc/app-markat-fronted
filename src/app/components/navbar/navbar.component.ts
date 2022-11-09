@@ -1,5 +1,5 @@
-import { BodeguerosService } from '../../services/stores/bodegueros.service';
-import { Bodegueros } from './../../models/bodegueros';
+import { Stores } from './../../models/stores';
+import { StoresService } from '../../services/stores/stores.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -11,19 +11,19 @@ import { ActivatedRoute } from '@angular/router';
 
 
 export class NavbarComponent implements OnInit {
-  id!: number;
-  Bodegueros!: Bodegueros;
+  idStore!: number;
+  store!: Stores;
 
   constructor(private activetedRoute: ActivatedRoute,
-    private BodeguerosService: BodeguerosService) { }
+    private StoresService: StoresService) { }
 
   ngOnInit(): void {
-    this.id = this.activetedRoute.snapshot.params['id'];
-    // this.BodeguerosService.getBodeguero(this.id).subscribe(
-    //   (data: Bodegueros) => {
-    //     this.Bodegueros = data;
-    //   }
-    // )
+    this.idStore = this.activetedRoute.snapshot.params['id'];
+    this.StoresService.getStore(this.idStore).subscribe(
+      (data: Stores) => {
+        this.store= data;
+      }
+    )
   }
 
 
