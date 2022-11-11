@@ -1,3 +1,4 @@
+import { ClienteService } from 'src/app/services/clients/cliente.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  
+  credits:number=0;
+  
+
+  constructor(private clienteService: ClienteService) { }
 
   ngOnInit(): void {
+
+this.clienteService.GetTotalCredits().subscribe(
+  (data:any)=>{
+    this.credits=data; 
+  }
+)
+
   }
 
 }

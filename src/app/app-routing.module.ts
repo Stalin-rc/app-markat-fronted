@@ -1,3 +1,4 @@
+import { ComprobanteComponent } from './components/comprobante/comprobante.component';
 import { NewVentasComponent } from './components/new-ventas/new-ventas.component';
 import { NewEditProductComponent } from './components/new-edit-product/new-edit-product.component';
 import { InventarioComponent } from './components/inventario/inventario.component';
@@ -14,6 +15,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ClientesComponent } from './components/clientes/clientes.component';
 import { NewEditClienteComponent } from './components/new-edit-cliente/new-edit-cliente.component';
+
+
 
 const routes: Routes = [
   { path: "landing", component: LandingComponent },
@@ -34,8 +37,10 @@ const routes: Routes = [
   { path: "dashboard/:id/ventas", component: VentasComponent },
   { path: "dashboard/:id/finanzas", component: FinanzasComponent },
   { path: "dashboard/:id/inventario/new", component: NewEditProductComponent },
-  { path: "dashboard/:id/inventario/edit/:id_producto", component: NewEditProductComponent },
+  { path: "dashboard/:id/inventario/edit/:id_stock", component: NewEditProductComponent },
   { path: "dashboard/:id/ventas/new", component: NewVentasComponent },
+  { path: "dashboard/:id/ventas/:id_venta/comprobante", component:ComprobanteComponent},
+
 
   { path: "**", component: LandingComponent }
 

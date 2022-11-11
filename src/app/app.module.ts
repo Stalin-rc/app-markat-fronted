@@ -28,7 +28,8 @@ import { NewVentasComponent } from './components/new-ventas/new-ventas.component
 import { NavLandingComponent } from './components/nav-landing/nav-landing.component';
 import { NewEditClienteComponent } from './components/new-edit-cliente/new-edit-cliente.component';
 
-import { GoogleChartsModule } from 'angular-google-charts'
+import { GoogleChartsModule } from 'angular-google-charts';
+import { ComprobanteComponent } from './components/comprobante/comprobante.component'
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { GoogleChartsModule } from 'angular-google-charts'
     NewEditProductComponent,
     NewVentasComponent,
     NavLandingComponent,
-    NewEditClienteComponent
+    NewEditClienteComponent,
+    ComprobanteComponent
   ],
   imports: [
     BrowserModule,

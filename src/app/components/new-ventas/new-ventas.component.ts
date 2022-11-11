@@ -1,3 +1,4 @@
+import { Stock } from './../../models/stock';
 import { DetalleService } from './../../services/detalle.service';
 import { Ventas } from './../../models/ventas';
 import { DetalleVenta } from './../../models/detalleVenta';
@@ -20,13 +21,15 @@ import { map, Observable, startWith } from 'rxjs';
 export class NewVentasComponent implements OnInit {
   cantidad!: number;
   id!: number;
-  myForm!: FormGroup;
+  myform!: FormGroup;
   options: Producto[] = [];
   filteredOptions!: Observable<Producto[]>;
   myControl = new FormControl('');
   producto!: Producto;
   detalles: DetalleVenta[] = [];
   _venta!: Ventas;
+  stock!: Stock;
+
   constructor(private formBuilder: FormBuilder,
     private activated: ActivatedRoute, private productoService: ProductosService,
     private clienteService: ClienteService, private ventaService: VentasService, private detalleService: DetalleService,
@@ -40,6 +43,7 @@ export class NewVentasComponent implements OnInit {
     this.reactiveForm();
     this.getProductos();
   }
+
   getProductos() {
     this.productoService.getProductos().subscribe(
       (data: Producto[]) => {
@@ -50,32 +54,35 @@ export class NewVentasComponent implements OnInit {
   conseguirProducto(data: any) {
     this.producto = data;
   }
+
   private _filter(value: string) {
     const filterValue = value.toLowerCase();
     return this.options.filter(option => option.productName.toLowerCase().includes(filterValue));
   }
   reactiveForm() {
-    this.myForm = this.formBuilder.group({
+    this.myform = this.formBuilder.group({
       nombre: ["", [Validators.required]],
       apellido: ["", [Validators.required]],
       dni: ["", [Validators.required]],
       boleta: ["", [Validators.required]],
       fecha: ["", [Validators.required]],
       credito: ["", [Validators.required]],
-      cantidad: ['', [Validators.required]]
+      cantidad: ['', [Validators.required]],
+      precio: ['', [Validators.required]]
     })
   }
   addLista() {
 
+    let _precio = this.myform.get('precio')?.value;
+    let _cantidad= this.myform.get('cantidad')?.value;
     let detalle: DetalleVenta = {
       id: 99999,
-      priceUnit: 1.2,
-      noUnits: this.cantidad,
-      subtotalPrice: 1.2 * this.cantidad,
+      priceUnit: _precio,
+      noUnits: _cantidad,
+      subtotalPrice: _precio * _cantidad,
       product: this.producto,
       sale: this._venta
     }
-
     this.detalles.push(detalle);
   }
   total() {
@@ -93,15 +100,15 @@ export class NewVentasComponent implements OnInit {
 
     this.clienteService.getClientes(this.id).subscribe(
       (data: Cliente[]) => {
-        let _cliente: any = data.find(x => x.dni == this.myForm.get('dni')?.value);
+        let _cliente: any = data.find(x => x.dni == this.myform.get('dni')?.value);
         if (_cliente) {
           let venta: Ventas = {
             id: 99999,
             totalPrice: this.total(),
             client: _cliente,
             dateSale: new Date(),
-            sellType: '123',
-            noVoucher: '123'
+            sellType: '312983812213',
+            noVoucher: '1231209301'
           }
           this.ventaService.addVenta(venta).subscribe({
             next: (data: Ventas) => {
@@ -111,7 +118,7 @@ export class NewVentasComponent implements OnInit {
               }
               this.detalleService.addDetalle(this.detalles).subscribe({
                 next: (data: DetalleVenta[]) => {
-                  this.router.navigate(['dashboard/1/ventas']);
+                  this.router.navigate(['dashboard/'+this.id+'/ventas']);
                 },
                 error: e => console.log('error detalle: ', e)
               })
@@ -121,13 +128,13 @@ export class NewVentasComponent implements OnInit {
         } else {
           let cliente: Cliente = {
             id: 99999,
-            firstName: this.myForm.get('first_name')?.value,
-            lastName: this.myForm.get('last_name')?.value,
-            dni: this.myForm.get('dni')?.value,
-            credit: this.myForm.get('credit')?.value,
-            morosidad: this.myForm.get('morosidad')?.value,
-            payDate: this.myForm.get('pay_date')?.value,
-            photo: this.myForm.get('photo')?.value
+            firstName: this.myform.get('first_name')?.value,
+            lastName: this.myform.get('last_name')?.value,
+            dni: this.myform.get('dni')?.value,
+            credit: this.myform.get('credit')?.value,
+            morosidad: this.myform.get('morosidad')?.value,
+            payDate: this.myform.get('pay_date')?.value,
+            photo: this.myform.get('photo')?.value
             
           }
           this.clienteService.addCliente(cliente).subscribe({
@@ -137,8 +144,8 @@ export class NewVentasComponent implements OnInit {
                 totalPrice: this.total(),
                 client: data,
                 dateSale: new Date(),
-                sellType: '123',
-                noVoucher: '123'
+                sellType: '312983812213',
+                noVoucher: '1231209301'
               }
               this.ventaService.addVenta(venta).subscribe({
                 next: (data: Ventas) => {
@@ -148,7 +155,7 @@ export class NewVentasComponent implements OnInit {
                   }
                   this.detalleService.addDetalle(this.detalles).subscribe({
                     next: (data: DetalleVenta[]) => {
-                      this.router.navigate(['dashboard/1/ventas']);
+                      this.router.navigate(['dashboard/'+this.id+'/ventas']);
                     },
                     error: e => console.log('error detalle: ', e)
                   })

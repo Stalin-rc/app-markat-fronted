@@ -29,6 +29,7 @@ export class ClientesComponent implements OnInit {
      this.id = this.activetedRoute.snapshot.params['id'];
 
   }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

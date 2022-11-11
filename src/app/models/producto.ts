@@ -1,3 +1,4 @@
+import { Stock } from './stock';
 export interface Producto {
     id: number,
     productName: string,
@@ -5,5 +6,6 @@ export interface Producto {
     productDescription: string,
     img: string,
     type_name: string,
-    precio: number
+    precio: number,
+    stock:Stock
 }

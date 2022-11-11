@@ -15,6 +15,11 @@ export class ClienteService {
   addCliente(cliente: Cliente) {
     return this.http.post<Cliente>('http://localhost:8080/api/clients', cliente);
   }
+
+  GetTotalCredits() {
+    return this.http.get('http://localhost:8080/api/clients/credits');
+  }
+
   /*
   getclente(id: number) {
     return this.http.get<Cliente>('http://localhost:3000/Cliente/' + id);

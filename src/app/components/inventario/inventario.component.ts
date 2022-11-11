@@ -1,10 +1,11 @@
-import { Stores } from '../../models/stores';
-import { StoresService } from '../../services/stores/stores.service';
-import { Producto } from './../../models/producto';
-import { ProductosService } from './../../services/products/productos.service';
+import { StoresService } from './../../services/stores/stores.service';
+import { Stores } from './../../models/stores';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { StocksService } from './../../services/stocks/stocks.service';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Stock } from 'src/app/models/stock';
 
 
 
@@ -18,20 +19,24 @@ import { ActivatedRoute } from '@angular/router';
 
 export class InventarioComponent implements OnInit {
   displayedColumns: string[] = ['producto', 'marca', 'descripcion', 'stock', 'precio', 'imagen', 'accion'];
-  dataSource = new MatTableDataSource<Producto>();
+  dataSource = new MatTableDataSource<Stock>();
+  stock: Stock[] = [];
+  idStore!: number;
+  store!: Stores;
 
-  id!: number;
-  Stores!: Stores;
-
-  constructor(private productService: ProductosService, private ActivatedRoute: ActivatedRoute,
-    private StoresService: StoresService) { }
+  constructor(private stockService: StocksService, private ActivatedRoute: ActivatedRoute, private router: Router, private snackbar: MatSnackBar,private StoresService: StoresService) { }
 
   ngOnInit(): void {
-    this.getProductos();
-    this.id = this.ActivatedRoute.snapshot.params['id'];
-    this.StoresService.getStore(this.id).subscribe(
+    this.idStore = this.ActivatedRoute.snapshot.params['id'];
+    this.stockService.getStock(this.idStore).subscribe(
+      (data: Stock[]) => {
+        this.dataSource = new MatTableDataSource(data);
+      }
+    )
+
+    this.StoresService.getStore(this.idStore).subscribe(
       (data: Stores) => {
-        this.Stores= data;
+        this.store= data;
       }
     )
 
@@ -41,23 +46,16 @@ export class InventarioComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  getProductos() {
-    this.productService.getProductos().subscribe(
-      (data: Producto[]) => {
-        this.dataSource = new MatTableDataSource(data);
-      }
-    )
-  }
-/* deleteProducto(id: number) {
-    this.productService.deleteProducto(id).subscribe({
-      next: (data: Producto) => {
-        this.getProductos();
+  deleteStock(id: number):void{
+    this.stockService.deleteStock(id).subscribe({
+      next: (data) => {
+        this.snackbar.open("Se eliminó correctamente","OK",{duration:3000});
+        this.ngOnInit();
       },
-
-      error: (e) => {
-        console.log(e);
+      error: (err) => {
+        console.log(err);
       }
     })
-  }*/
+  }
   
 }
