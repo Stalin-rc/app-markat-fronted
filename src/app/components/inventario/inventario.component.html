@@ -12,6 +12,9 @@
                 <input matInput (keyup)="applyFilter($event)" placeholder="Nombre del producto" #input>
             </mat-form-field>
         </div>
+        <div class="col-md-6 text-end">
+            <button mat-raised-button color="primary" routerLink="/dashboard/{{idStore}}/inventario/new">Añadir</button>
+        </div>
     </div>
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">

@@ -1,5 +1,3 @@
-import { StoresService } from '../../services/stores/stores.service';
-import { Stores } from '../../models/stores';
 import { ActivatedRoute } from '@angular/router';
 import { Cliente } from './../../models/cliente';
 import { Component, OnInit } from '@angular/core';
@@ -13,7 +11,7 @@ import { ClienteService } from 'src/app/services/clients/cliente.service';
 })
 export class ClientesComponent implements OnInit {
 
-  displayedColumns: string[] = ['photo','firstName','lastName','dni','credit','morosidad','pay_date'];
+  displayedColumns: string[] = ['photo','firstName','lastName','dni','noPhone','clientAddress'];
   dataSource = new MatTableDataSource<Cliente>();
   id!:number;
 

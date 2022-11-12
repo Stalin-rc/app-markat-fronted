@@ -1,3 +1,5 @@
+import { DetalleVenta } from './detalleVenta';
+import { Stores } from './stores';
 import { Cliente } from './cliente';
 export interface Ventas {
     id: number;
@@ -5,5 +7,6 @@ export interface Ventas {
     client: Cliente,
     dateSale: Date,
     sellType: string,
-    noVoucher: string
+    noVoucher: string,
+    store: Stores
 }

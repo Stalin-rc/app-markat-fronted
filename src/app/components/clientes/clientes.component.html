@@ -11,9 +11,10 @@
                 <input matInput (keyup)="applyFilter($event)" placeholder="nombre cliente" #input>
             </mat-form-field>
         </div>
+        <!--
         <div class="col-md-6 text-end">
             <button mat-raised-button color="primary" routerLink="/dashboard/{{id}}/clientes/new">Añadir</button>
-        </div>
+        </div>-->
     </div>
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -44,21 +45,14 @@
         </ng-container>
 
  <!-- Name Column -->
- <ng-container matColumnDef="credit">
-    <th mat-header-cell *matHeaderCellDef class="text-center">Créditos </th>
-    <td mat-cell *matCellDef="let element" class="text-center"> {{element.credit}} </td>
+ <ng-container matColumnDef="noPhone">
+    <th mat-header-cell *matHeaderCellDef class="text-center">N° Celular </th>
+    <td mat-cell *matCellDef="let element" class="text-center"> {{element.noPhone}} </td>
 </ng-container>
 
- <!-- Name Column -->
- <ng-container matColumnDef="morosidad">
-    <th mat-header-cell *matHeaderCellDef class="text-center">Morosidad </th>
-    <td mat-cell *matCellDef="let element" class="text-center"> {{element.morosidad}} </td>
-</ng-container>
-
- <!-- Name Column -->
- <ng-container matColumnDef="pay_date">
-    <th mat-header-cell *matHeaderCellDef class="text-center">Fecha de pago </th>
-    <td mat-cell *matCellDef="let element" class="text-center"> {{element.payDate|date:"shortDate"}} </td>
+ <ng-container matColumnDef="clientAddress">
+    <th mat-header-cell *matHeaderCellDef class="text-center">Dirección </th>
+    <td mat-cell *matCellDef="let element" class="text-center"> {{element.clientAddress}} </td>
 </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

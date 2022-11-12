@@ -26,10 +26,9 @@ import { FinanzasComponent } from './components/finanzas/finanzas.component';
 import { NewEditProductComponent } from './components/new-edit-product/new-edit-product.component';
 import { NewVentasComponent } from './components/new-ventas/new-ventas.component';
 import { NavLandingComponent } from './components/nav-landing/nav-landing.component';
-import { NewEditClienteComponent } from './components/new-edit-cliente/new-edit-cliente.component';
-
 import { GoogleChartsModule } from 'angular-google-charts';
-import { ComprobanteComponent } from './components/comprobante/comprobante.component'
+import { ComprobanteComponent } from './components/comprobante/comprobante.component';
+import { AddStockComponent } from './components/add-stock/add-stock.component'
 
 @NgModule({
   declarations: [
@@ -49,8 +48,8 @@ import { ComprobanteComponent } from './components/comprobante/comprobante.compo
     NewEditProductComponent,
     NewVentasComponent,
     NavLandingComponent,
-    NewEditClienteComponent,
-    ComprobanteComponent
+    ComprobanteComponent,
+    AddStockComponent
   ],
   imports: [
     BrowserModule,

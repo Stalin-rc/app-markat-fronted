@@ -4,9 +4,8 @@ export interface Cliente {
     firstName: string,
     lastName: string,
     dni: string,
-    credit: number,
-    morosidad: boolean,
-    payDate: Date,
+    clientAddress:string, 
+    noPhone: string, 
     photo:string
 
 }

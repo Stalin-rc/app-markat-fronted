@@ -23,6 +23,11 @@ body{
 	font-size: 14px;
 }
 
+#logo{
+	width: 30%;
+}
+
+
 .bold{
 	font-weight: 900;
 }

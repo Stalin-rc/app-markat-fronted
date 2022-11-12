@@ -1,0 +1,128 @@
+<app-navbar></app-navbar>
+<div class="container mt-5">
+  <h4>Stock | Añadir</h4>
+  <br />
+  <br />
+  <div>
+    <form [formGroup]="myform">
+      <h5>Detalles del inventario</h5>
+      <div class="card py-4 px-2">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <h6>Fecha de expiracion</h6>
+              <mat-form-field appearance="standard" class="w-100">
+                <mat-label>Seleccione una fecha</mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="picker"
+                  formControlName="dateExpiration"
+                />
+                <mat-hint>MM/DD/AAAA</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="picker">
+                </mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              <br/>
+              <br/>
+              <br/>
+              <h6>Fecha de compra</h6>
+              <mat-form-field appearance="standard" class="w-100">
+                <mat-label>Seleccione una fecha</mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="picker2"
+                  formControlName="dateShopping"/>
+                <mat-hint>MM/DD/AAAA</mat-hint>
+                <mat-datepicker-toggle  matSuffix  [for]="picker2">
+                </mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br/>
+      <h5>Añadir producto a la lista</h5>
+      <div class="card py-3">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field
+                class="example-full-width"
+                appearance="standard"
+                class="w-100"
+              >
+                <mat-label>Nombre del producto</mat-label>
+                <input
+                  type="text"
+                  placeholder="Escribe el nombre del producto"
+                  matInput
+                  [formControl]="myControl"
+                  [matAutocomplete]="auto"
+                />
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option
+                    *ngFor="let option of filteredOptions | async"
+                    [value]="option.productName"
+                  >
+                    <div (click)="conseguirProducto(option)">
+                      {{ option.productName }}
+                    </div>
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-6">
+                    <mat-form-field appearance="standard" class="w-100">
+                      <mat-label>Cantidad</mat-label>
+                      <input
+                        matInput
+                        placeholder="Cantidad del producto.."
+                        formControlName="noUnits"
+                        type="number"
+                      />
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-4">
+                    <mat-form-field appearance="standard" class="w-100">
+                      <mat-label>Precio Compra (S/.)</mat-label>
+                      <input
+                        matInput
+                        placeholder="S/. 1.20"
+                        formControlName="pricePerUnit"
+                        type="number"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+      <br />
+     
+      <div class="my-4 d-flex justify-content-between">
+        <div>
+          <button
+            mat-raised-button
+            class="me-4"
+            routerLink="/dashboard/{{ id }}/inventario"
+          >
+            Cancelar
+          </button>
+          <button mat-raised-button id="button" (click)="addStock()">
+            Guardar
+          </button>
+        </div>
+      </div>
+      <br />
+    </form>
+  </div>
+</div>

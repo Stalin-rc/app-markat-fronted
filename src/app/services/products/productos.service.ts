@@ -15,6 +15,10 @@ export class ProductosService {
     return this.http.get<Producto[]>('http://localhost:8080/api/products');
   }
 
+  getProducto(id:number) {
+    return this.http.get<Producto>('http://localhost:8080/api/products/' + id);
+  }
+  
   /* 
   getProducto(id: number) {
     return this.http.get<Producto>('http://localhost:3000/Productos/' + id);

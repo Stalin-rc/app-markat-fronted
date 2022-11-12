@@ -1,7 +1,6 @@
 import { Cliente } from '../../models/cliente';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { identifierName } from '@angular/compiler';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,10 +13,6 @@ export class ClienteService {
   }
   addCliente(cliente: Cliente) {
     return this.http.post<Cliente>('http://localhost:8080/api/clients', cliente);
-  }
-
-  GetTotalCredits() {
-    return this.http.get('http://localhost:8080/api/clients/credits');
   }
 
   /*

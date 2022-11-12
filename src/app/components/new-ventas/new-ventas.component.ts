@@ -1,3 +1,4 @@
+import { Stores } from './../../models/stores';
 import { Stock } from './../../models/stock';
 import { DetalleService } from './../../services/detalle.service';
 import { Ventas } from './../../models/ventas';
@@ -61,16 +62,20 @@ export class NewVentasComponent implements OnInit {
   }
   reactiveForm() {
     this.myform = this.formBuilder.group({
-      nombre: ["", [Validators.required]],
-      apellido: ["", [Validators.required]],
+     
       dni: ["", [Validators.required]],
+      firstName: ["", [Validators.required]],
+      lastName: ["", [Validators.required]],
+      clientAddress: ["", [Validators.required]],
+      noPhone: ["", [Validators.required]],
+      
       boleta: ["", [Validators.required]],
       fecha: ["", [Validators.required]],
-      credito: ["", [Validators.required]],
       cantidad: ['', [Validators.required]],
       precio: ['', [Validators.required]]
     })
   }
+
   addLista() {
 
     let _precio = this.myform.get('precio')?.value;
@@ -85,6 +90,7 @@ export class NewVentasComponent implements OnInit {
     }
     this.detalles.push(detalle);
   }
+  
   total() {
     let _sum = 0;
     for (let i = 0; i < this.detalles.length; i++) {
@@ -97,10 +103,23 @@ export class NewVentasComponent implements OnInit {
   }
   addVenta() {
 
-
     this.clienteService.getClientes(this.id).subscribe(
       (data: Cliente[]) => {
         let _cliente: any = data.find(x => x.dni == this.myform.get('dni')?.value);
+        let _store: Stores={
+          id:this.id,
+          storeName: '',
+          noRuc:'',
+          noPhone:'',
+          ownerName: '',
+          ownerLastName: '',
+          ownerPhoto: '',
+          ownerDni: '',
+          email: '',
+          password: '',
+          city: ''
+        } 
+        
         if (_cliente) {
           let venta: Ventas = {
             id: 99999,
@@ -108,7 +127,8 @@ export class NewVentasComponent implements OnInit {
             client: _cliente,
             dateSale: new Date(),
             sellType: '312983812213',
-            noVoucher: '1231209301'
+            noVoucher: '1231209301',
+            store:_store, 
           }
           this.ventaService.addVenta(venta).subscribe({
             next: (data: Ventas) => {
@@ -127,15 +147,13 @@ export class NewVentasComponent implements OnInit {
           })
         } else {
           let cliente: Cliente = {
-            id: 99999,
-            firstName: this.myform.get('first_name')?.value,
-            lastName: this.myform.get('last_name')?.value,
+            id: 999999,
+            firstName: this.myform.get('firstName')?.value,
+            lastName: this.myform.get('lastName')?.value,
             dni: this.myform.get('dni')?.value,
-            credit: this.myform.get('credit')?.value,
-            morosidad: this.myform.get('morosidad')?.value,
-            payDate: this.myform.get('pay_date')?.value,
-            photo: this.myform.get('photo')?.value
-            
+            clientAddress: this.myform.get('clientAddress')?.value,
+            noPhone: this.myform.get('noPhone')?.value, 
+            photo: 'https://i.postimg.cc/5NS9Kb8K/pngtree-cyber-man-icon-isolated-on-abstract-background-png-image-1779361.jpg',
           }
           this.clienteService.addCliente(cliente).subscribe({
             next: (data: Cliente) => {
@@ -145,7 +163,8 @@ export class NewVentasComponent implements OnInit {
                 client: data,
                 dateSale: new Date(),
                 sellType: '312983812213',
-                noVoucher: '1231209301'
+                noVoucher: '1231209301',
+                store:_store,
               }
               this.ventaService.addVenta(venta).subscribe({
                 next: (data: Ventas) => {
@@ -167,8 +186,6 @@ export class NewVentasComponent implements OnInit {
         }
       }
     )
-
-
 
   }
 
