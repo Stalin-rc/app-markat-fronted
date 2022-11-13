@@ -28,4 +28,11 @@ export class StocksService {
   deleteStock(id: number){
     return this.http.delete<Stock[]>('http://localhost:8080/api/stocks/'+id);
   }
+
+/*Necesita stock*/
+  getNeedStock(id: number) {
+    return this.http.get<Stock[]>('http://localhost:8080/api/top3/stocks/' +id );
+  }
+
+
 }
