@@ -4,9 +4,9 @@
   <div class="row align-items-center fila">
     <div class="col mx-5">
       <h3 class="row titulo">Monto de ventas totales</h3>
-      <h6 class="row">Total de venta en los último 30 días</h6>
+      <h6 class="row">Total de venta en los último 7 días</h6>
       <div class="row contenido">
-        <div class="col text-start"><h1 class="text-success font-700">S/. {{ventaTotal}}</h1></div>
+        <div class="col text-start"><h1 class="font-total">S/. {{ventaTotal}}</h1></div>
         <div class="col text-end"><h2>+ 30%</h2></div>
       </div>
     </div>
@@ -32,42 +32,37 @@
     <div class="col mx-5">
       <h3 class="row titulo">Necesita Stock</h3>
       <h6 class="row">Stock limitado</h6>
-      <div class="row contenido_2">
-        <div class="col-5 text-start"><h5>Agua Cielo 2.5L</h5></div>
-        <div class="col-3 text-center"><h5>1 u</h5></div>
-        <div class="col-4 text-center"><img class="img img-fluid" src="https://www.ajegroup.com/wp-content/uploads/2020/05/colombia-cielo.jpg"></div>
-      </div>
-      <div class="row contenido_2">
-        <div class="col-5 text-start"><h5>Atun Gloria 200g</h5></div>
-        <div class="col-3 text-center"><h5>3 u</h5></div>
-        <div class="col-4 text-center"><img class="img img-fluid"src="https://plazavea.vteximg.com.br/arquivos/ids/6876866-1000-1000/20124082.jpg"></div>
-      </div>
-      <div class="row contenido_2">
-        <div class="col-5 text-start"><h5>Arroz Costeño 5kg</h5></div>
-        <div class="col-3 text-center"><h5>5 u</h5></div>
-        <div class="col-4 text-center"><img class="img img-fluid"src="https://plazavea.vteximg.com.br/arquivos/ids/554165-1000-1000/641425.jpg?v=637426577652870000"></div>
-      </div>
+
+      <div class="main_table">
+				<table class="table text-center">
+					<tbody>
+						<tr *ngFor="let item of stockNeed| slice:(stockNeed.length>3? stockNeed.length-3:0);let as i">
+							<td class="text-start text-top">{{item.product.productName}}</td>
+							<td class="text-center text-top">{{item.noUnits}}</td>
+							<td class="text-center"><img class="img img-fluid"src={{item.product.img}}></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
     </div>
 
     <div class="col mx-5">
       <h3 class="row titulo">Ultimas Ventas</h3>
-
       <h6 class="row">Top 3</h6>
-      <div class="row contenido_2">
-        <div class="col-6 text-start"><h5>Jorge Diaz Dual</h5></div>
-        <div class="col-2 text-center"><h5>1202 c</h5></div>
-        <div class="col-4 text-center"><img class="img img-fluid"src="https://i.postimg.cc/RFhdSLK1/Guillermo-Dorronsoro-04-768x1024.jpg"></div>
-      </div>
-      <div class="row contenido_2">
-        <div class="col-6 text-start"><h5>Sara Mendoza Gomez</h5></div>
-        <div class="col-2 text-center"><h5>892 c</h5></div>
-        <div class="col-4 text-center"><img class="img img-fluid"src="https://www.workforcealliance.biz/wp-content/uploads/2018/07/p04.jpg"></div>
-      </div>
-      <div class="row contenido_2">
-        <div class="col-6 text-start"><h5>Ale Gonzáles Garcia</h5></div>
-        <div class="col-2 text-center"><h5>799 c</h5></div>
-        <div class="col-4 text-center"><img class="img img-fluid"src="https://i.postimg.cc/q7jQH5hM/Jesus-matos-low.png"></div>
-      </div>
+      <div class="main_table">
+				<table class="table text-center">
+					<tbody>
+						<tr *ngFor="let item of newSales| slice:(newSales.length>3? newSales.length-3:0);let as i">
+							<td class="text-start text-top">{{item.client.firstName}} {{item.client.lastName}}</td>
+							<td class="text-center text-top">S/. {{item.totalPrice}}</td>
+							<td class="text-center"><img class="img-client img-fluid"src={{item.client.photo}}></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+  
     </div>
   </div>
 </div>
+
