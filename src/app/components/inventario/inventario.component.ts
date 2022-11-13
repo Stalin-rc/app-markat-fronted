@@ -49,7 +49,7 @@ export class InventarioComponent implements OnInit {
   deleteStock(id: number):void{
     this.stockService.deleteStock(id).subscribe({
       next: (data) => {
-        this.snackbar.open("Se eliminó correctamente","OK",{duration:3000});
+        this.snackbar.open("El stock se eliminó correctamente","OK",{duration:3000});
         this.ngOnInit();
       },
       error: (err) => {
