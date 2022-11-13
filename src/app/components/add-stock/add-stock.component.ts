@@ -10,7 +10,7 @@ import { ClienteService } from 'src/app/services/clients/cliente.service';
 import { Cliente } from './../../models/cliente';
 import { ProductosService } from './../../services/products/productos.service';
 import { Producto } from './../../models/producto';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { map, Observable, startWith } from 'rxjs';
@@ -35,7 +35,7 @@ export class AddStockComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private activated: ActivatedRoute, private productoService: ProductosService,
-    private stockService: StocksService) { }
+    private stockService: StocksService, private router:Router) { }
 
   ngOnInit(): void {
     this.id = this.activated.snapshot.params['id'];
@@ -63,8 +63,10 @@ export class AddStockComponent implements OnInit {
   }
   reactiveForm() {
     this.myform = this.formBuilder.group({
-      fecha_exp: ["", [Validators.required]],
-      fecha_shop: ["", [Validators.required]]
+      dateExpiration:["", [Validators.required]],
+      dateShopping:["", [Validators.required]],
+      noUnits:["", [Validators.required]],
+      pricePerUnit:["", [Validators.required]],
     })
   }
   
@@ -85,34 +87,25 @@ export class AddStockComponent implements OnInit {
       city: ''
     } 
 
-
     let stock: Stock = {
       id: 999999,
       noUnits: this.myform.get('noUnits')?.value,
       pricePerUnit: this.myform.get('pricePerUnit')?.value,
       dateExpiration: this.myform.get('dateExpiration')?.value,
       dateShopping: this.myform.get('dateShopping')?.value,
-      store: _store,
-      product: this.producto 
+      product: this.producto,  
+      store: _store
    
     }
-/*
+
     this.stockService.addStock(stock).subscribe({
 
       next: (data: Stock) => {
-        console.log('añadiendo stock: ', data);
-        
-        this.stockService.addStock(this.detalles).subscribe({
-          next: (data: Stock) => {
-            this.router.navigate(['dashboard/'+this.id+'/ventas']);
-          },
-          error: e => console.log('error detalle: ', e)
-        })
+       // console.log('aÃ±adiendo stock: ', data);
+        this.router.navigate(['dashboard/'+this.id+'/inventario']);
       },
       error: e => console.log('error venta: ' + e)
-
-
-    });*/
+    });
 
   }  
 }
