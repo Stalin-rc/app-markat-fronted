@@ -1,3 +1,4 @@
+import { DetalleVenta } from './../../models/detalleVenta';
 import { Ventas } from '../../models/ventas';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -14,7 +15,7 @@ export class VentasService {
   }
 
   getVenta(id: number){
-    return this.http.get<Ventas>("http://localhost:8080/api/sales"+"/"+id.toString());
+    return this.http.get<Ventas>("http://localhost:8080/api/sales"+"/"+id);
   }
 
   addVenta(venta:Ventas){
@@ -26,10 +27,13 @@ export class VentasService {
   getTotalSales(id: number) {
     return this.http.get('http://localhost:8080/api/sales/total/' +id );
   }
-
+/*Stock Total*/
   getTotalStock(id: number) {
     return this.http.get('http://localhost:8080/api/stock/total/' +id );
   }
-
+/*Ventas recientes*/
+  getNewSales(id: number) {
+    return this.http.get<Ventas[]>('http://localhost:8080/api/top3/sales/' +id );
+  }
 
 }
