@@ -4,12 +4,21 @@
     padding: 0;
 }
 
+.font-total{
+    font-size: 35px;
+    font-weight:700;
+    color: green;
+}
+
 .titulo{
     border-style: solid;
     border-width: 0px 0px 2px 0px;
     border-color: #000;
 }
  
+.text-top{
+    font-size: 18px;
+}
 
 .col #centro{
     text-align: center;
@@ -28,8 +37,17 @@
     margin-top: 20px;
 }
 
+.items-center{
+    align-items: center;
+}
+
 .img{
 width: 35%;
+border-radius: 50%;
+}
+
+.img-client{
+width: 50px;
 border-radius: 50%;
 }
 
