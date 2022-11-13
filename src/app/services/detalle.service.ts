@@ -16,4 +16,9 @@ export class DetalleService {
   addDetalle(detalleVenta: DetalleVenta[]) {
     return this.http.post<DetalleVenta[]>('http://localhost:8080/api/details', detalleVenta);
   }
+
+    /*Buscar detalle de venta por ID de Venta*/
+    getSaleDetailsByIdSale(id: number) {
+      return this.http.get<DetalleVenta>('http://localhost:8080/api/sales/'+id +'/saledetails');
+    }
 }
