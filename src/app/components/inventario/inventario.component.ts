@@ -58,4 +58,22 @@ export class InventarioComponent implements OnInit {
     })
   }
   
+  exportExcel(){
+    this.stockService.exportStocks(this.idStore).subscribe(
+        (data: any) => {
+          let file = new Blob([data],{
+            type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+          });
+          let fileURL = URL.createObjectURL(file);
+          var anchor = document.createElement('a');
+          anchor.download="stock_report.xlsx";
+          anchor.href=fileURL;
+          anchor.click();
+        },
+        (error: any) => {
+          console.log("No se pudo exportar");
+        }
+    );
+  }
+  
 }
