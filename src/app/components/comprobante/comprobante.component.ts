@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { VentasService } from './../../services/sales/ventas.service';
 import { Ventas } from './../../models/ventas';
 import { DetalleService } from './../../services/detalle.service';
@@ -8,24 +9,22 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-comprobante',
   templateUrl: './comprobante.component.html',
-  styleUrls: ['./comprobante.component.css']
+  styleUrls: ['./comprobante.component.css'],
 })
 export class ComprobanteComponent implements OnInit {
+  idVenta!: number;
+  sale!: Ventas;
 
- //detalleVenta!:DetalleVenta;
- sale!:Ventas;
-  
-  constructor( private ventasService: VentasService, private DetalleService: DetalleService) { }
+  constructor(
+    private ActivatedRoute: ActivatedRoute,
+    private ventasService: VentasService  ) {}
 
   ngOnInit(): void {
-  
-      this.ventasService.getVenta(33).subscribe(
-        (data: Ventas) => {
-          this.sale = data;
-          console.log(data);
-        }
-      )
+    this.idVenta = this.ActivatedRoute.snapshot.params['id_venta'];
+
+    this.ventasService.getVenta(this.idVenta).subscribe((data: Ventas) => {
+      this.sale = data;
+      console.log(data);
+    });
   }
-
 }
-
