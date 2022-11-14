@@ -32,6 +32,19 @@ body{
 .bold{
 	font-weight: 900;
 }
+#datos-sec{
+	font-weight: 500;
+	font-size:15px;
+}
+
+#nombre-tienda{
+	font-weight: 700;
+	font-size:20px;
+}
+.invoice-bold{
+	font-weight: 900;
+	font-size:30px;
+}
 
 .light{
 	font-weight: 100;
@@ -40,7 +53,7 @@ body{
 .wrapper{
 	background: var(--white);
 	padding: 30px;
-}
+}   
 
 .invoice_wrapper{
 	border: 3px solid var(--primary);
