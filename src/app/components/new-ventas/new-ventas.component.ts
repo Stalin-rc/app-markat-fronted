@@ -30,6 +30,7 @@ export class NewVentasComponent implements OnInit {
   detalles: DetalleVenta[] = [];
   _venta!: Ventas;
   stock!: Stock;
+  isValid = false;
 
   constructor(private formBuilder: FormBuilder,
     private activated: ActivatedRoute, private productoService: ProductosService,
@@ -46,7 +47,7 @@ export class NewVentasComponent implements OnInit {
   }
 
   getProductos() {
-    this.productoService.getProductos().subscribe(
+    this.productoService.getProductByIdStore(this.id).subscribe(
       (data: Producto[]) => {
         this.options = data;
       }
@@ -103,9 +104,10 @@ export class NewVentasComponent implements OnInit {
   }
 
   addVenta() {
-
+    
     this.clienteService.getClientes(this.id).subscribe(
       (data: Cliente[]) => {
+       
         let _cliente: any = data.find(x => x.dni == this.myform.get('dni')?.value);
         
         let _store: Stores={
@@ -123,7 +125,6 @@ export class NewVentasComponent implements OnInit {
         } 
         
         if (_cliente) {
-          console.log(_cliente);
           let venta: Ventas = {
             id: 99999,
             totalPrice: this.total(),
@@ -149,7 +150,6 @@ export class NewVentasComponent implements OnInit {
             },
             error: e => console.log('error venta: ' + e)
           })
-console.log("hola");
 
         } else {
           let cliente: Cliente = {
