@@ -13,7 +13,8 @@
             </mat-form-field>
         </div>
         <div class="col-md-6 text-end">
-            <button mat-raised-button color="primary" routerLink="/dashboard/{{idStore}}/inventario/new">Añadir</button>
+            <button mat-raised-button color="primary" routerLink="/dashboard/{{idStore}}/inventario/new" class="me-4">Añadir</button>
+            <button mat-raised-button style="background-color: rgb(29,111,66); color: white;" (click)="exportExcel()">Exportar <mat-icon>archive</mat-icon></button>
         </div>
     </div>
 
