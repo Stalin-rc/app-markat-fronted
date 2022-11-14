@@ -101,11 +101,13 @@ export class NewVentasComponent implements OnInit {
   quitar(idx: number) {
     this.detalles.splice(idx, 1);
   }
+
   addVenta() {
 
     this.clienteService.getClientes(this.id).subscribe(
       (data: Cliente[]) => {
         let _cliente: any = data.find(x => x.dni == this.myform.get('dni')?.value);
+        
         let _store: Stores={
           id:this.id,
           storeName: '',
@@ -121,14 +123,16 @@ export class NewVentasComponent implements OnInit {
         } 
         
         if (_cliente) {
+          console.log(_cliente);
           let venta: Ventas = {
             id: 99999,
             totalPrice: this.total(),
             client: _cliente,
             dateSale: new Date(),
-            sellType: '312983812213',
-            noVoucher: '1231209301',
-            store:_store, 
+            sellType: 'Boleta',
+            noVoucher: '123120h01',
+            store:_store,
+            saleDetails:[]
           }
           this.ventaService.addVenta(venta).subscribe({
             next: (data: Ventas) => {
@@ -145,6 +149,8 @@ export class NewVentasComponent implements OnInit {
             },
             error: e => console.log('error venta: ' + e)
           })
+console.log("hola");
+
         } else {
           let cliente: Cliente = {
             id: 999999,
@@ -155,6 +161,7 @@ export class NewVentasComponent implements OnInit {
             noPhone: this.myform.get('noPhone')?.value, 
             photo: 'https://i.postimg.cc/5NS9Kb8K/pngtree-cyber-man-icon-isolated-on-abstract-background-png-image-1779361.jpg',
           }
+          console.log("entro");
           this.clienteService.addCliente(cliente).subscribe({
             next: (data: Cliente) => {
               let venta: Ventas = {
@@ -162,9 +169,10 @@ export class NewVentasComponent implements OnInit {
                 totalPrice: this.total(),
                 client: data,
                 dateSale: new Date(),
-                sellType: '312983812213',
+                sellType: 'Boleta',
                 noVoucher: '1231209301',
                 store:_store,
+                saleDetails:[]
               }
               this.ventaService.addVenta(venta).subscribe({
                 next: (data: Ventas) => {
