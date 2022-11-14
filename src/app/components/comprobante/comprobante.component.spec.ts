@@ -1,9 +1,7 @@
-import { VentasService } from './../../services/sales/ventas.service';
-import { Ventas } from './../../models/ventas';
-import { DetalleService } from './../../services/detalle.service';
-import { DetalleVenta } from './../../models/detalleVenta';
-import { Stores } from './../../models/stores';
-import { Component, OnInit } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { ComprobanteComponent } from './comprobante.component';
+
 
 describe('ComprobanteComponent', () => {
   let component: ComprobanteComponent;
