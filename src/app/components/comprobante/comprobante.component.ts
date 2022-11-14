@@ -11,10 +11,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./comprobante.component.css']
 })
 export class ComprobanteComponent implements OnInit {
+
+ //detalleVenta!:DetalleVenta;
+ sale!:Ventas;
   
-  constructor( private ventasService: VentasService, private detalleService: DetalleService) { }
+  constructor( private ventasService: VentasService, private DetalleService: DetalleService) { }
 
   ngOnInit(): void {
+  
+      this.ventasService.getVenta(33).subscribe(
+        (data: Ventas) => {
+          this.sale = data;
+          console.log(data);
+        }
+      )
   }
 
 }
+
