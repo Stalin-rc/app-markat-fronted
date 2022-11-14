@@ -19,21 +19,9 @@ export class ProductosService {
     return this.http.get<Producto>('http://localhost:8080/api/products/' + id);
   }
   
-  /* 
-  getProducto(id: number) {
-    return this.http.get<Producto>('http://localhost:3000/Productos/' + id);
-  }
+getProductByIdStore(id:number)
+{
+  return this.http.get<Producto[]>('http://localhost:8080/api/user/' + id+'/products');
+}
 
-
-  deleteProducto(id: number) {
-    return this.http.delete<Producto>('http://localhost:3000/Productos/' + id);
-  }
-
-  addProducto(producto: Producto) {
-    return this.http.post<Producto>('http://localhost:3000/Productos', producto);
-  }
-
-  editProducto(producto: Producto) {
-    return this.http.put<Producto>('http://localhost:3000/Productos/'+producto.id, producto);
-  }*/
 }
