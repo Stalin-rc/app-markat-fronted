@@ -1,3 +1,4 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { Cliente } from './../../models/cliente';
 import { Component, OnInit } from '@angular/core';
@@ -16,16 +17,12 @@ export class ClientesComponent implements OnInit {
   id!:number;
 
   constructor(private clienteService: ClienteService, private ActivatedRoute: ActivatedRoute, 
-    private activetedRoute: ActivatedRoute) { }
+    private activetedRoute: ActivatedRoute, private snackbar: MatSnackBar) { }
 
   ngOnInit(): void {
     
     this.id = this.activetedRoute.snapshot.params['id'];
     this.getClientes(this.id);
-
-  
-     this.id = this.activetedRoute.snapshot.params['id'];
-
   }
 
   applyFilter(event: Event) {
@@ -40,5 +37,4 @@ export class ClientesComponent implements OnInit {
       }
     )
   }
-
 }
