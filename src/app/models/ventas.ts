@@ -8,5 +8,6 @@ export interface Ventas {
     dateSale: Date,
     sellType: string,
     noVoucher: string,
-    store: Stores
+    store: Stores,
+    saleDetails: DetalleVenta[]
 }
