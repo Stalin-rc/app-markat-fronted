@@ -34,5 +34,10 @@ export class StocksService {
     return this.http.get<Stock[]>('http://localhost:8080/api/top3/stocks/' +id );
   }
 
+   exportStocks(id: Number){
+    return this.http.get('http://localhost:8080/api/stocks/export/excel/'+id,{
+      responseType: "blob"
+    });
+  }
 
 }
