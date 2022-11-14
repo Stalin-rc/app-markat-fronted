@@ -3,165 +3,76 @@
 		<div class="header">
 			<div class="logo_invoice_wrap">
 				<div class="logo_sec">
-					<img id="logo"src="../assets/markat-bw.jpg" alt="code logo">
+					<img id="logo"src="../assets/markat-bw.png" alt="code logo">
 					<br>
 					<span class="title_wrap">
 						<p class="title bold">Markat</p>
 						<p class="sub_title">Inc.</p>
 					</span>
+					<br>
 				</div>
 				<div class="invoice_sec">
-					<p class="invoice bold">Comprobante</p>
+					<h6> RUC: {{sale.store.noRuc}}190</h6>
+					<p class="invoice-bold">BOLETA DE VENTA ELECTRÓNICA
+					</p>
+					<br>
 					<p class="invoice_no">
-						<span class="bold">Comprobante</span>
-						<span>#312488</span>
+						<span class="bold">Código: </span>
+						<span>#A0{{sale.noVoucher}}</span>
 					</p>
 					<p class="date">
 						<span class="bold">Fecha</span>
-						<span>08/Jan/2022</span>
+						<span>{{sale.dateSale|date:'shortDate'}}</span>
 					</p>
 				</div>
+
+			</div>
+			<div class="">
+				<span id="nombre-tienda">  Tienda: {{sale.store.storeName}}</span><br>
+				<span id="datos-sec">  Dirección: {{sale.store.city}}</span><br>
+				<span id="datos-sec">  N° Telefono: +51 {{sale.store.noPhone}}</span><br>
+				<span id="datos-sec">  Vendedor: {{sale.store.ownerName}} {{sale.store.ownerLastName}} </span>
 			</div>
 			<div class="bill_total_wrap">
 				<div class="bill_sec">
 					<p>Cliente</p> 
-	          		<p class="bold name">Nombre de cliente</p>
+	          		<p class="bold name">{{sale.client.firstName}} {{sale.client.lastName}}</p>
+					<p class="datos-sec">DNI: {{sale.client.dni}}</p>
 				</div>
 				<div class="total_wrap">
 					<p>Total</p>
-	          		<p class="bold price">S/. 1200</p>
+	          		<p class="bold price">S/. {{sale.totalPrice}}</p>
 				</div>
 			</div>
 		</div>
 		<div class="body">
 			<div class="main_table">
-				<div class="table_header">
-					<div class="row">
-						<div class="col col_no">NO.</div>
-						<div class="col col_des">ITEM DESCRIPTION</div>
-						<div class="col col_price">PRICE</div>
-						<div class="col col_qty">QTY</div>
-						<div class="col col_total">TOTAL</div>
-					</div>
-				</div>
-				<div class="table_body">
-					<div class="row">
-						<div class="col col_no">
-							<p>01</p>
-						</div>
-						<div class="col col_des">
-							<p class="bold">Web Design</p>
-							<p>Lorem ipsum dolor sit.</p>
-						</div>
-						<div class="col col_price">
-							<p>$350</p>
-						</div>
-						<div class="col col_qty">
-							<p>2</p>
-						</div>
-						<div class="col col_total">
-							<p>$700.00</p>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col col_no">
-							<p>02</p>
-						</div>
-						<div class="col col_des">
-							<p class="bold">Web Development</p>
-							<p>Lorem ipsum dolor sit.</p>
-						</div>
-						<div class="col col_price">
-							<p>$350</p>
-						</div>
-						<div class="col col_qty">
-							<p>2</p>
-						</div>
-						<div class="col col_total">
-							<p>$700.00</p>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col col_no">
-							<p>03</p>
-						</div>
-						<div class="col col_des">
-							<p class="bold">GitHub</p>
-							<p>Lorem ipsum dolor sit.</p>
-						</div>
-						<div class="col col_price">
-							<p>$120</p>
-						</div>
-						<div class="col col_qty">
-							<p>1</p>
-						</div>
-						<div class="col col_total">
-							<p>$700.00</p>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col col_no">
-							<p>04</p>
-						</div>
-						<div class="col col_des">
-							<p class="bold">Backend Design</p>
-							<p>Lorem ipsum dolor sit.</p>
-						</div>
-						<div class="col col_price">
-							<p>$350</p>
-						</div>
-						<div class="col col_qty">
-							<p>2</p>
-						</div>
-						<div class="col col_total">
-							<p>$700.00</p>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col col_no">
-							<p>05</p>
-						</div>
-						<div class="col col_des">
-							<p class="bold">Backend Development</p>
-							<p>Lorem ipsum dolor sit.</p>
-						</div>
-						<div class="col col_price">
-							<p>$150</p>
-						</div>
-						<div class="col col_qty">
-							<p>1</p>
-						</div>
-						<div class="col col_total">
-							<p>$700.00</p>
-						</div>
-					</div>
-				</div>
+				<table class="table text-center">
+					<thead>
+						<tr>
+							<td>Item</td>
+							<td>Descripción del producto</td>
+							<td>Cantidad</td>
+							<td>Precio unitario</td>
+							<td>Importe</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let item of sale.saleDetails ; let i=index ">
+							<td>{{i+1}}</td>
+							<td>{{item.product.productName}}</td>
+							<td>{{item.noUnits}}</td>
+							<td>{{item.priceUnit|currency:'S/ '}}</td>
+							<td>{{item.subtotalPrice |currency:'S/ '}}</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
-			<div class="paymethod_grandtotal_wrap">
-				<div class="paymethod_sec">
-					<p class="bold">Payment Method</p>
-					<p>Visa, master Card and We accept Cheque</p>
-				</div>
-				<div class="grandtotal_sec">
-			        <p class="bold">
-			            <span>SUB TOTAL</span>
-			            <span>$7500</span>
-			        </p>
-			        <p>
-			            <span>Tax Vat 18%</span>
-			            <span>$200</span>
-			        </p>
-			        <p>
-			            <span>Discount 10%</span>
-			            <span>-$700</span>
-			        </p>
-			       	<p class="bold">
-			            <span>Grand Total</span>
-			            <span>$7000.0</span>
-			        </p>
-				</div>
+			<br>
+			<div class="d-flex justify-content-between">
+				<div><span></span><span class="fw-light">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span></div>
+				<div><span class="">Importe total: </span> <span class="fs-5">S/. {{sale.totalPrice}}</span></div>
 			</div>
 		</div>
-		
 	</div>
 </div>
