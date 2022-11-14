@@ -11,8 +11,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./comprobante.component.css']
 })
 export class ComprobanteComponent implements OnInit {
-
- 
   
   constructor( private ventasService: VentasService, private detalleService: DetalleService) { }
 
