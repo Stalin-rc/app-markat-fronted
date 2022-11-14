@@ -17,9 +17,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class VentasComponent implements OnInit {
   displayedColumns: string[] = [
     'cliente',
-    'productos',
     'precioTotal',
     'fechaVenta',
+    'NroComprobante',
     'comprobante',
   ];
   dataSource = new MatTableDataSource<Ventas>();
@@ -34,14 +34,11 @@ export class VentasComponent implements OnInit {
 
   ngOnInit(): void {
     this.idStore = this.activetedRoute.snapshot.params['id'];
-    //this.getVentas(this.idStore);
-
     this.ventaService.getVentas(this.idStore).subscribe((data: Ventas[]) => {
       this.dataSource = new MatTableDataSource(data);
     });
+
   }
-
-
 
   applyFilter(event: Event) {
     let filterValue = (event.target as HTMLInputElement).value;
